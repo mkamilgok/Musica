@@ -44,8 +44,7 @@ function SearchBar(props){
                 </ul>
             </div>
             <div className="SearchBar">
-                <input placeholder="Enter A Song, Album, or Artist" onChange={handleTermChange}/>
-                <button className="SearchButton" onClick={search}>SEARCH</button>
+                <button className="SearchButton" onClick={search}>Get Your Recommendation Playlist</button>
             </div>
         </div>
 
