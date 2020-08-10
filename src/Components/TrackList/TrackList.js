@@ -6,7 +6,13 @@ function TrackList(props){
     return (
         <div className="TrackList">
             {props.tracks.map(track =>
-                <Track track={track} onAdd={props.onAdd} onRemove={props.onRemove} isRemoval={props.isRemoval}/>
+                <Track
+                    key={track.id}
+                    track={track}
+                    onAdd={props.onAdd}
+                    onRemove={props.onRemove}
+                    isRemoval={props.isRemoval}
+                />
             )}
         </div>
     );
