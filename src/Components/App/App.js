@@ -10,6 +10,9 @@ function App() {
                  ,{id: 2, name:"k", artist:"Athena", album:"Genclik"}
                  ,{id: 3, name:"Olmaz", artist:"Athena", album:"Genclik"}]);
 
+    const [playlistName, setPlaylistName] = useState("Yıkık");
+    const [playlistTracks, setPlaylistTracks] = useState(searchResults.filter(track => track.id % 2 == 1));
+
   return (
       <div>
         <h1>Mu<span className="highlight">Si</span>ca!</h1>
@@ -17,7 +20,7 @@ function App() {
           <SearchBar />
           <div className="App-playlist">
             <SearchResults searchResults={searchResults}/>
-            <Playlist />
+            <Playlist playlistName={playlistName} playlistTracks={playlistTracks}/>
           </div>
         </div>
       </div>
