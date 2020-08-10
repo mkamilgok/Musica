@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 6.94rem;
+    padding-top: 3rem;
     margin-bottom: 6.33rem;
 }
 
@@ -37,4 +37,33 @@
 
 .SearchButton:hover {
     background-color: rgba(108, 65, 233, .7);
+}
+
+.SearchBar-search-options ul {
+    padding-top: 3rem;
+    display: flex;
+    justify-content: center;
+    color: #ffffff;
+}
+
+.SearchBar-search-options li {
+    cursor: pointer;
+    width: 10rem;
+    border-bottom: 1px solid #fff;
+    padding: 0 2.58rem .33rem 2.58rem;
+    line-height: 1.13;
+    text-align: center;
+    font-weight: 600;
+    font-size: .83rem;
+    transition: color .25s;
+}
+
+.SearchBar-search-options li:hover {
+    color: #d4cfcf;
+}
+
+.SearchBar-search-options li.active,
+.SearchBar-search-options li.active:hover {
+    border-bottom: 1px solid #f0c36c;
+    color: #f0c36c;
 }
