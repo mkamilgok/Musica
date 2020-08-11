@@ -83,7 +83,10 @@ let Spotify = {
         }
     },
 
-    getBestSingerTracks(timeRange) {
+    getBestArtists(timeRange) {
+        let best10Artists;
+        let relevant10Artists;
+        let allArtists;
         const accessToken = Spotify.getAccessToken();
         let myHeaders = new Headers();
         myHeaders.append("Accept", "application/json");
@@ -94,11 +97,25 @@ let Spotify = {
             headers: myHeaders,
             redirect: 'follow'
         };
-        return fetch(`https://api.spotify.com/v1/me/top/artists?time_range=${timeRange}&limit=15&offset=0`, requestOptions)
+        return fetch(`https://api.spotify.com/v1/me/top/artists?time_range=${timeRange}&limit=10&offset=0`, requestOptions)
+            .then(response => response.json())
+            .then(result => result.items)
+            .then(theArtists => {
+                best10Artists = theArtists;
+                return theArtists.map(artist => ({
+                    id : artist.id,
+                    name : artist.name,
+                    genre : artist.genres[0]
+                }));
+            });
+
+        /*
+        return fetch(`https://api.spotify.com/v1/me/top/artists?time_range=${timeRange}&limit=10&offset=0`, requestOptions)
             .then(response => response.json())
             .then(result => result.items)
             .then(theArtists => {
                 if (theArtists) {
+                    best10Artists = theArtists;
                     return theArtists.map(artist => ({
                         id : artist.id,
                         name : artist.name,
@@ -106,8 +123,63 @@ let Spotify = {
                     }));
                 }
             });
-    }
+         */
+    },
 
+    getRelevantArtist(artistId) {
+        const accessToken = Spotify.getAccessToken();
+        return fetch(`https://api.spotify.com/v1/artists/${artistId}/related-artists`, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        })
+            .then(response => response.json())
+            .then(jsonResponse => {
+                let artists = jsonResponse.artists;
+                let rawArtist = artists[Math.floor(Math.random() * artists.length)];
+                let artist = {
+                    id: rawArtist.id,
+                    name : rawArtist.name,
+                    genre : rawArtist.genres[0]
+                };
+                return artist;
+            });
+    },
+    getTopSongsOfArtist(artistId) {
+        const accessToken = Spotify.getAccessToken();
+        return fetch(`https://api.spotify.com/v1/artists/${artistId}/top-tracks?country=from_token`, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        })
+            .then(response => response.json())
+            .then(jsonResponse => {
+                let rawSongs = jsonResponse.tracks;
+                const songs = [];
+                for(let song of rawSongs){
+                    songs.push({
+                        id: song.id,
+                        name: song.name,
+                        artist: song.artists[0].name,
+                        album: song.album.name,
+                        uri: song.uri
+                    });
+                }
+                return songs;
+            });
+    },
+    checkSongIsSaved(songId) {
+        const accessToken = Spotify.getAccessToken();
+        return fetch(`https://api.spotify.com/v1/me/tracks/contains?ids=${songId}`, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        })
+            .then(response => response.json())
+            .then(jsonResponse => {
+                return jsonResponse[0];
+            });
+    }
 };
 
 export default Spotify;

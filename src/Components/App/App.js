@@ -6,10 +6,12 @@ import Playlist from "../Playlist/Playlist";
 import Spotify from "../../util/Spotify";
 
 function App() {
-    const [searchResults, setSearchResults] = useState([]);
+    const [allArtists, setAllArtists] = useState([]);
 
     const [playlistName, setPlaylistName] = useState("Yıkık");
     const [playlistTracks, setPlaylistTracks] = useState([]);
+
+    const [songs, setSongs] = useState([]);
 
     function addTrack(track){
         if(playlistTracks.find(song => song.id === track.id)){
@@ -36,13 +38,43 @@ function App() {
 
     async function search(searchTerm){
         const result = await Spotify.search(searchTerm);
-        setSearchResults(result);
+        setAllArtists(result);
     }
 
     async function getBestSingerTracks(timeRange){
-        const artists = await Spotify.getBestSingerTracks(timeRange);
-        setSearchResults(artists);
+        const bestArtists = await Spotify.getBestArtists(timeRange);
+        const relevantArtists = [];
+        for(let artist of bestArtists){
+            relevantArtists.push(await Spotify.getRelevantArtist(artist.id))
+        }
+        const allArtistsFound = bestArtists.concat(relevantArtists)
+        setAllArtists(allArtistsFound);
+
+        let songsFromArtists = [];
+        for(let artist of allArtistsFound){
+            const arr = await Spotify.getTopSongsOfArtist(artist.id);
+            songsFromArtists.push(arr);
+        }
+
+        const songsToBeAdded = [];
+        for(let i = 0; i < songsFromArtists.length; i++){
+            for(let j = 0; j < songsFromArtists[i].length; j++){
+                const isSaved = await Spotify.checkSongIsSaved(songsFromArtists[i][j].id);
+                console.log(isSaved);
+                if(!isSaved){
+                    songsToBeAdded.push(songsFromArtists[i][j]);
+                    break;
+                }
+            }
+        }
+        console.log(songsToBeAdded);
+        setSongs(songsToBeAdded);
     }
+
+    useEffect(() => {
+        console.log(`You clicked  times`);
+    }, [songs]);
+
 
   return (
       <div>
@@ -50,7 +82,7 @@ function App() {
         <div className="App">
           <SearchBar onSearch={search} onAction={getBestSingerTracks}/>
           <div className="App-playlist">
-              <SearchResults searchResults={searchResults} /*onAdd = {addTrack}*//>
+              <SearchResults searchResults={songs} /*onAdd = {addTrack}*//>
             <Playlist
                 playlistName={playlistName}
                 playlistTracks={playlistTracks}
