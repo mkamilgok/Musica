@@ -84,24 +84,6 @@ let Spotify = {
     },
 
     getBestSingerTracks(timeRange) {
-        /*
-        const accessToken = Spotify.getAccessToken();
-        try {
-            return fetch(`https://api.spotify.com/v1/me/top/artists?time_range=${timeRange}&limit=15&offset=0`, {
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type':'application/json',
-                    Authorization: `Bearer ${accessToken}`
-                }
-            }).then(response => response.json())
-                .then(response => console.log(response))
-                .then(result => {
-                    return [result]
-                });
-        }
-        catch (e){
-            console.log(e);
-        }*/
         const accessToken = Spotify.getAccessToken();
         let myHeaders = new Headers();
         myHeaders.append("Accept", "application/json");
@@ -112,14 +94,18 @@ let Spotify = {
             headers: myHeaders,
             redirect: 'follow'
         };
-
-        fetch("https://api.spotify.com/v1/me/top/artists?time_range=medium_term&limit=15&offset=0", requestOptions)
+        return fetch("https://api.spotify.com/v1/me/top/artists?time_range=medium_term&limit=15&offset=0", requestOptions)
             .then(response => response.json())
-            .then(result => {
-                console.log(result);
-                return result;
-            })
-            .catch(error => console.log('error', error));
+            .then(result => result.items)
+            .then(theArtists => {
+                if (theArtists) {
+                    return theArtists.map(artist => ({
+                        id : artist.id,
+                        name : artist.name,
+                        genre : artist.genres[0]
+                    }));
+                }
+            });
     }
 
 };

@@ -6,8 +6,7 @@ import Playlist from "../Playlist/Playlist";
 import Spotify from "../../util/Spotify";
 
 function App() {
-    const [searchResults, setSearchResults] = useState(
-        []);
+    const [searchResults, setSearchResults] = useState([]);
 
     const [playlistName, setPlaylistName] = useState("Yıkık");
     const [playlistTracks, setPlaylistTracks] = useState([]);
@@ -41,8 +40,8 @@ function App() {
     }
 
     async function getBestSingerTracks(timeRange){
-        const result = await Spotify.getBestSingerTracks(timeRange);
-        setSearchResults(result);
+        const artists = await Spotify.getBestSingerTracks(timeRange);
+        setSearchResults(artists);
     }
 
   return (
@@ -51,7 +50,7 @@ function App() {
         <div className="App">
           <SearchBar onSearch={search} onAction={getBestSingerTracks}/>
           <div className="App-playlist">
-            <SearchResults searchResults={searchResults} onAdd={addTrack}/>
+              <SearchResults searchResults={searchResults} /*onAdd = {addTrack}*//>
             <Playlist
                 playlistName={playlistName}
                 playlistTracks={playlistTracks}
