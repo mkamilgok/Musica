@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import "./SearchBar.css";
 
+
 function SearchBar(props){
 
     const timeRanges = {
@@ -9,11 +10,15 @@ function SearchBar(props){
         "All Of My Spotify History" : "long_term"
     };
 
-    const[term, setTerm] = useState("");
+    const[term, setTerm] = useState("Aşk");
     const[timeRange, setTimeRange] = useState("medium_term");
 
     const search = () => {
         props.onSearch(term);
+    }
+
+    const getBestSingerTracks = () => {
+        props.onAction(timeRange);
     }
 
     const handleTermChange = (event) => {
@@ -26,6 +31,8 @@ function SearchBar(props){
         }
         return "";
     }
+
+
 
     return(
         <div>
@@ -44,7 +51,7 @@ function SearchBar(props){
                 </ul>
             </div>
             <div className="SearchBar">
-                <button className="SearchButton" onClick={search}>Get Your Recommendation Playlist</button>
+                <button className="SearchButton" onClick={getBestSingerTracks}>Get Your Recommendation Playlist</button>
             </div>
         </div>
 

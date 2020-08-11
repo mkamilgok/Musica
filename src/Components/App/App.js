@@ -40,11 +40,16 @@ function App() {
         setSearchResults(result);
     }
 
+    async function getBestSingerTracks(timeRange){
+        const result = await Spotify.getBestSingerTracks(timeRange);
+        setSearchResults(result);
+    }
+
   return (
       <div>
         <h1>Mu<span className="highlight">Si</span>ca!</h1>
         <div className="App">
-          <SearchBar onSearch={search}/>
+          <SearchBar onSearch={search} onAction={getBestSingerTracks}/>
           <div className="App-playlist">
             <SearchResults searchResults={searchResults} onAdd={addTrack}/>
             <Playlist

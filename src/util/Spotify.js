@@ -19,7 +19,7 @@ let Spotify = {
             window.history.pushState('Access Token', null, '/');
             return accessToken;
         } else {
-            const accessUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;
+            const accessUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public%20user-top-read%20user-library-read&redirect_uri=${redirectUri}`;
             window.location = accessUrl;
         }
     },
@@ -81,6 +81,45 @@ let Spotify = {
         } else {
             return;
         }
+    },
+
+    getBestSingerTracks(timeRange) {
+        /*
+        const accessToken = Spotify.getAccessToken();
+        try {
+            return fetch(`https://api.spotify.com/v1/me/top/artists?time_range=${timeRange}&limit=15&offset=0`, {
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type':'application/json',
+                    Authorization: `Bearer ${accessToken}`
+                }
+            }).then(response => response.json())
+                .then(response => console.log(response))
+                .then(result => {
+                    return [result]
+                });
+        }
+        catch (e){
+            console.log(e);
+        }*/
+        const accessToken = Spotify.getAccessToken();
+        let myHeaders = new Headers();
+        myHeaders.append("Accept", "application/json");
+        myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("Authorization", "Bearer " + accessToken);
+        let requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+
+        fetch("https://api.spotify.com/v1/me/top/artists?time_range=medium_term&limit=15&offset=0", requestOptions)
+            .then(response => response.json())
+            .then(result => {
+                console.log(result);
+                return result;
+            })
+            .catch(error => console.log('error', error));
     }
 
 };
