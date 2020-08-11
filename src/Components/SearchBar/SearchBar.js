@@ -5,7 +5,7 @@ import "./SearchBar.css";
 function SearchBar(props){
 
     const timeRanges = {
-        "Lately Listened (Last 4 weeks)" : "sort_term",
+        "Lately Listened (Last 4 weeks)" : "short_term",
         "Medium Time Range (Last 6 months)" : "medium_term",
         "All Of My Spotify History" : "long_term"
     };
@@ -32,7 +32,9 @@ function SearchBar(props){
         return "";
     }
 
-
+    const handleTimeRangeChange = (timeRange) =>{
+        setTimeRange(timeRange);
+    }
 
     return(
         <div>
@@ -41,7 +43,7 @@ function SearchBar(props){
                     {Object.keys(timeRanges).map(searchByOption => {
                         let searchByOptionValue = timeRanges[searchByOption];
                         return <li
-                                    onClick={() => setTimeRange(searchByOptionValue)}
+                                    onClick={() => handleTimeRangeChange(searchByOptionValue)}
                                     className={getSearchByClass(searchByOptionValue)}
                                     key={searchByOptionValue}
                                 >

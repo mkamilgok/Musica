@@ -94,7 +94,7 @@ let Spotify = {
             headers: myHeaders,
             redirect: 'follow'
         };
-        return fetch("https://api.spotify.com/v1/me/top/artists?time_range=medium_term&limit=15&offset=0", requestOptions)
+        return fetch(`https://api.spotify.com/v1/me/top/artists?time_range=${timeRange}&limit=15&offset=0`, requestOptions)
             .then(response => response.json())
             .then(result => result.items)
             .then(theArtists => {
