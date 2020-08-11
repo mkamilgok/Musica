@@ -19,6 +19,20 @@
     font-family: 'Poppins', sans-serif;
     font-size: 1.55rem;
     color: #fff;
+    text-align: center;
+    animation-name: blink;
+    animation-duration: 2000ms;
+    animation-iteration-count: infinite;
+    opacity: 1;
+}
+
+.Playlist input:focus + i {
+    display: none;
+}
+
+@keyframes blink {
+    from { opacity: 1; }
+    to { opacity: 0.5; }
 }
 
 .Playlist-save {

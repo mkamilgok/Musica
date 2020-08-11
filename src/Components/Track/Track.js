@@ -16,7 +16,7 @@ function Track(props){
     return (
         <div className="Track">
             <div className="Track-information">
-                <h3>{props.name}</h3>
+                <h3><a href={props.url} target="_blank"> {props.name} </a></h3>
                 <p>{props.artist} | {props.album}</p>
             </div>
             {/*<button

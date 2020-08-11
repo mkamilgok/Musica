@@ -18,6 +18,7 @@ function TrackList(props){
                             name={track.name}
                             artist={track.artist}
                             album={track.album}
+                            url={track.url}
                             /*onAdd = {props.onAdd}
                                 onRemove={props.onRemove}
                                 isRemoval={props.isRemoval}*/
