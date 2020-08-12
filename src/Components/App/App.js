@@ -8,7 +8,7 @@ import Spotify from "../../util/Spotify";
 function App() {
     const [allArtists, setAllArtists] = useState([]);
 
-    const [playlistName, setPlaylistName] = useState("Yıkık");
+    const [playlistName, setPlaylistName] = useState("Enter Playlist Name for Spotify");
     const [playlistTracks, setPlaylistTracks] = useState([]);
 
     const [songs, setSongs] = useState([]);
@@ -82,7 +82,7 @@ function App() {
         <div className="App">
           <SearchBar onSearch={search} onAction={getBestSingerTracks}/>
           <div className="App-playlist">
-              <SearchResults searchResults={songs} /*onAdd = {addTrack}*//>
+              <SearchResults searchResults={songs} onAdd = {addTrack}/>
             <Playlist
                 playlistName={playlistName}
                 playlistTracks={playlistTracks}

@@ -7,11 +7,12 @@
 .Track-action {
     cursor: pointer;
     padding: .5rem;
-    font-size: 1.05rem;
+    font-size: 2.0rem;
     transition: color .25s;
     border: 0px;
     background-color: rgba(0, 0, 0, 0);
-    color: #fff;
+    color: #b2fc51;
+    margin-right: 1rem;
 }
 
 .Track-action:hover {
@@ -24,9 +25,11 @@
     flex-direction: column;
     justify-content: center;
     height: 90px;
+    width: 100%;
 }
 
 .Track-information h3 {
+    font-size: 1.05rem;
     margin-bottom: .22rem;
 }
 
@@ -36,8 +39,8 @@
     color: rgba(256, 256, 256, 0.8);
 }
 a {
-    color: #FFF;
+    color: #d4ff94;
 }
 a:hover {
-    color: #00F
+    color: #b2fc51;
 }

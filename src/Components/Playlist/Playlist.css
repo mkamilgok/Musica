@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     overflow-y: scroll;
-    width: 37%;
+    width: 40%;
     max-height: 950px;
     padding: 2.27rem 1.16rem;
     background-color: rgba(1, 12, 63, 0.7);
@@ -17,13 +17,14 @@
     background: transparent;
     border-bottom: 1px solid #6f6f6f;
     font-family: 'Poppins', sans-serif;
-    font-size: 1.55rem;
-    color: #fff;
+    font-size: 1.45rem;
+    color: #ffe3ee;
     text-align: center;
     animation-name: blink;
     animation-duration: 2000ms;
     animation-iteration-count: infinite;
     opacity: 1;
+    margin-bottom: 1rem;
 }
 
 .Playlist input:focus + i {

@@ -5,23 +5,24 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 
 function TrackList(props){
-    if (!props.tracks) {
+    if ((!props.tracks || props.tracks.length < 10) && !props.isRemoval) {
         return <span>Loading...</span>;
     }
+
+    if ((!props.tracks || props.tracks.length < 1) && props.isRemoval) {
+        return <span>Click + button to add songs to your playlist.</span>;
+    }
+
     else{
         return (
             <PerfectScrollbar>
                 <div className="TrackList">
                     {props.tracks.map(track =>
                         <Track
-                            key={track.id}
-                            name={track.name}
-                            artist={track.artist}
-                            album={track.album}
-                            url={track.url}
-                            /*onAdd = {props.onAdd}
-                                onRemove={props.onRemove}
-                                isRemoval={props.isRemoval}*/
+                            track={track}
+                            onAdd = {props.onAdd}
+                            onRemove={props.onRemove}
+                            isRemoval={props.isRemoval}
                         />)}
                 </div>
             </PerfectScrollbar>
