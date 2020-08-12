@@ -63,16 +63,19 @@ function App() {
 
         const songsToBeAdded = [];
         for(let i = 0; i < songsFromArtists.length; i++){
-            for(let j = 0; j < songsFromArtists[i].length; j++){
-                const isSaved = await Spotify.checkSongIsSaved(songsFromArtists[i][j].id);
-                console.log(isSaved);
-                if(!isSaved){
-                    songsToBeAdded.push(songsFromArtists[i][j]);
-                    break;
-                }
+            //Get ids of top ten songs
+            const idList = songsFromArtists[i].map(song => song.id);
+            //Get boolean array whether the song is saved or not
+            const isSaved = await Spotify.checkSongsAreSaved(idList);
+            //Filter unsaved songs
+            const unsavedSongs = songsFromArtists[i].filter((song, index) => !isSaved[index]);
+            //Get a random element from unsaved songs
+            let randomSong;
+            if(unsavedSongs.length !== 0){
+                randomSong = unsavedSongs[Math.floor(Math.random() * unsavedSongs.length)];
             }
+            songsToBeAdded.push(randomSong);
         }
-        console.log(songsToBeAdded);
         setSongs(songsToBeAdded);
     }
 

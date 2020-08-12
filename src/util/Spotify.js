@@ -169,16 +169,20 @@ let Spotify = {
                 return songs;
             });
     },
-    checkSongIsSaved(songId) {
+    checkSongsAreSaved(songIdList) {
         const accessToken = Spotify.getAccessToken();
-        return fetch(`https://api.spotify.com/v1/me/tracks/contains?ids=${songId}`, {
+        let idString = songIdList[0];
+        for(let i = 1; i < songIdList.length; i++){
+            idString += "%2C" + songIdList[i];
+        }
+        return fetch(`https://api.spotify.com/v1/me/tracks/contains?ids=${idString}`, {
             headers: {
                 Authorization: `Bearer ${accessToken}`
             }
         })
             .then(response => response.json())
             .then(jsonResponse => {
-                return jsonResponse[0];
+                return jsonResponse;
             });
     }
 };
