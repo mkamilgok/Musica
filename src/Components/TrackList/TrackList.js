@@ -6,7 +6,10 @@ import 'react-perfect-scrollbar/dist/css/styles.css';
 
 function TrackList(props){
     if ((!props.tracks || props.tracks.length < 10) && !props.isRemoval) {
-        return <span className="waiting-prompt">Waiting...</span>;
+        return <span className="waiting-prompt">Waiting...<br/><br/>
+                - You may need to click 2 times to the "Get Recommended Playlist" button at the beginning.<br/><br/>
+                - The process can take A COUPLE OF SECONDS depending on your network service.
+               </span>;
     }
 
     if ((!props.tracks || props.tracks.length < 1) && props.isRemoval) {

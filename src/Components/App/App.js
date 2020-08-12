@@ -39,7 +39,7 @@ function App() {
         });
     }
 
-    async function getBestSingerTracks(timeRange){
+    async function getDiscoveredSongs(timeRange){
         const bestArtists = await Spotify.getBestArtists(timeRange);
         const relevantArtists = [];
         for(let artist of bestArtists){
@@ -101,7 +101,7 @@ function App() {
       <div>
         <h1>Mu<span className="highlight">Si</span>ca!</h1>
         <div className="App">
-          <SearchBar onAction={getBestSingerTracks}/>
+          <SearchBar onAction={getDiscoveredSongs}/>
           <div className="App-playlist">
               <SearchResults searchResults={songs} onAdd = {addTrack} onAddAll={addAllTracks}/>
             <Playlist

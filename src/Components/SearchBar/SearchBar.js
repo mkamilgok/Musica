@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import "./SearchBar.css";
+;
 
 
 function SearchBar(props){
@@ -13,7 +14,7 @@ function SearchBar(props){
 
 
 
-    const getBestSingerTracks = () => {
+    const getDiscoveredSongs = () => {
         props.onAction(timeRange);
     }
 
@@ -45,7 +46,11 @@ function SearchBar(props){
                 </ul>
             </div>
             <div className="SearchBar">
-                <button className="SearchButton" onClick={getBestSingerTracks}>Get Your Recommended Playlist</button>
+                <button className="SearchButton" onClick={getDiscoveredSongs}>Get Your Recommended Playlist</button>
+                <div className="WrapperChat">
+                    <div class="bubble" />
+                    <div class="bubble2 b2" />
+                </div>
             </div>
         </div>
 
