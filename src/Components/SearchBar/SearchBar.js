@@ -53,7 +53,7 @@ function SearchBar(props){
                 </ul>
             </div>
             <div className="SearchBar">
-                <button className="SearchButton" onClick={getBestSingerTracks}>Get Your Recommendation Playlist</button>
+                <button className="SearchButton" onClick={getBestSingerTracks}>Get Your Recommended Playlist</button>
             </div>
         </div>
 

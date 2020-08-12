@@ -21,6 +21,10 @@ function App() {
         setPlaylistTracks(playlistTracks.concat([track]));
     }
 
+    function addAllTracks(){
+        setPlaylistTracks(songs);
+    }
+
     function removeTrack(track){
         setPlaylistTracks(playlistTracks.filter(savedTrack => savedTrack.id != track.id));
     }
@@ -79,12 +83,11 @@ function App() {
 
   return (
       <div>
-
         <h1>Mu<span className="highlight">Si</span>ca!</h1>
         <div className="App">
           <SearchBar onSearch={search} onAction={getBestSingerTracks}/>
           <div className="App-playlist">
-              <SearchResults searchResults={songs} onAdd = {addTrack}/>
+              <SearchResults searchResults={songs} onAdd = {addTrack} onAddAll={addAllTracks}/>
             <Playlist
                 playlistName={playlistName}
                 playlistTracks={playlistTracks}
