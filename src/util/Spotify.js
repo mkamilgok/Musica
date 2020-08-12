@@ -105,7 +105,7 @@ let Spotify = {
                 return theArtists.map(artist => ({
                     id : artist.id,
                     name : artist.name,
-                    genre : artist.genres[0]
+                    genre : artist.genres
                 }));
             });
 
@@ -119,7 +119,7 @@ let Spotify = {
                     return theArtists.map(artist => ({
                         id : artist.id,
                         name : artist.name,
-                        genre : artist.genres[0]
+                        genre : artist.genres
                     }));
                 }
             });
@@ -140,7 +140,7 @@ let Spotify = {
                 let artist = {
                     id: rawArtist.id,
                     name : rawArtist.name,
-                    genre : rawArtist.genres[0]
+                    genre : rawArtist.genres
                 };
                 return artist;
             });

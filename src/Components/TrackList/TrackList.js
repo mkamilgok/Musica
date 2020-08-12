@@ -10,7 +10,7 @@ function TrackList(props){
     }
 
     if ((!props.tracks || props.tracks.length < 1) && props.isRemoval) {
-        return <span className="user-prompt">Click + button to add songs to your playlist.</span>;
+        return <span className="user-prompt"> Click "+" button on the left panel for adding songs to your playlist.</span>;
     }
 
     else{

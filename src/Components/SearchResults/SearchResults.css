@@ -18,7 +18,26 @@
         margin-bottom: 2rem;
     }
 }
+.header {
+    align-content: center;
+}
 h2 {
+    font-size: 1.45rem;
     border-bottom: 1px solid #6f6f6f;
-    text-align: left;
+    align-content: flex-start;
+}
+button {
+    border-radius: 54px;
+    margin-left: 25px;
+    margin-bottom: 4px;
+    padding: 6px 6px ;
+    align-content: flex-end;
+    cursor: pointer;
+    background-color: #b2fc51;
+    font-size: 0.9rem;
+    color: #4f4937;
+    font-weight: 550;
+}
+button:hover {
+    background-color: rgba(108, 200, 233, .7);
 }
