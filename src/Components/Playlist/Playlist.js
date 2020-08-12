@@ -16,7 +16,7 @@ function Playlist(props) {
     return (
         <div className="Playlist">
             <input
-                autofocus
+                autoFocus
                 value={props.playlistName}
                 onChange={handleNameChange}
             />

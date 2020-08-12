@@ -84,9 +84,6 @@ let Spotify = {
     },
 
     getBestArtists(timeRange) {
-        let best10Artists;
-        let relevant10Artists;
-        let allArtists;
         const accessToken = Spotify.getAccessToken();
         let myHeaders = new Headers();
         myHeaders.append("Accept", "application/json");
@@ -101,29 +98,12 @@ let Spotify = {
             .then(response => response.json())
             .then(result => result.items)
             .then(theArtists => {
-                best10Artists = theArtists;
                 return theArtists.map(artist => ({
                     id : artist.id,
                     name : artist.name,
                     genre : artist.genres
                 }));
             });
-
-        /*
-        return fetch(`https://api.spotify.com/v1/me/top/artists?time_range=${timeRange}&limit=10&offset=0`, requestOptions)
-            .then(response => response.json())
-            .then(result => result.items)
-            .then(theArtists => {
-                if (theArtists) {
-                    best10Artists = theArtists;
-                    return theArtists.map(artist => ({
-                        id : artist.id,
-                        name : artist.name,
-                        genre : artist.genres
-                    }));
-                }
-            });
-         */
     },
 
     getRelevantArtist(artistId) {

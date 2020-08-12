@@ -9,20 +9,12 @@ function SearchBar(props){
         "Medium Time Range (Last 6 months)" : "medium_term",
         "All Of My Spotify History" : "long_term"
     };
-
-    const[term, setTerm] = useState("Aşk");
     const[timeRange, setTimeRange] = useState("medium_term");
 
-    const search = () => {
-        props.onSearch(term);
-    }
+
 
     const getBestSingerTracks = () => {
         props.onAction(timeRange);
-    }
-
-    const handleTermChange = (event) => {
-        setTerm(event.target.value);
     }
 
     function getSearchByClass(searchByOption){

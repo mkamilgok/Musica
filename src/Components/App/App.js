@@ -7,8 +7,6 @@ import Spotify from "../../util/Spotify";
 
 
 function App() {
-    const [allArtists, setAllArtists] = useState([]);
-
     const [playlistName, setPlaylistName] = useState("Enter Playlist Name for Spotify");
     const [playlistTracks, setPlaylistTracks] = useState([]);
 
@@ -26,7 +24,7 @@ function App() {
     }
 
     function removeTrack(track){
-        setPlaylistTracks(playlistTracks.filter(savedTrack => savedTrack.id != track.id));
+        setPlaylistTracks(playlistTracks.filter(savedTrack => savedTrack.id !== track.id));
     }
 
     function updatePlaylistName(name){
@@ -41,11 +39,6 @@ function App() {
         });
     }
 
-    async function search(searchTerm){
-        const result = await Spotify.search(searchTerm);
-        setAllArtists(result);
-    }
-
     async function getBestSingerTracks(timeRange){
         const bestArtists = await Spotify.getBestArtists(timeRange);
         const relevantArtists = [];
@@ -53,7 +46,7 @@ function App() {
             relevantArtists.push(await Spotify.getRelevantArtist(artist.id))
         }
         const allArtistsFound = bestArtists.concat(relevantArtists)
-        setAllArtists(allArtistsFound);
+
 
         let songsFromArtists = [];
         for(let artist of allArtistsFound){
@@ -108,7 +101,7 @@ function App() {
       <div>
         <h1>Mu<span className="highlight">Si</span>ca!</h1>
         <div className="App">
-          <SearchBar onSearch={search} onAction={getBestSingerTracks}/>
+          <SearchBar onAction={getBestSingerTracks}/>
           <div className="App-playlist">
               <SearchResults searchResults={songs} onAdd = {addTrack} onAddAll={addAllTracks}/>
             <Playlist
