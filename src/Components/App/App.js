@@ -5,6 +5,7 @@ import SearchResults from "../SearchResults/SearchResults";
 import Playlist from "../Playlist/Playlist";
 import Spotify from "../../util/Spotify";
 
+
 function App() {
     const [allArtists, setAllArtists] = useState([]);
 
@@ -31,7 +32,7 @@ function App() {
     async function savePlaylist(){
         const trackURIs = playlistTracks.map(track => track.uri);
         Spotify.savePlaylist(playlistName, trackURIs).then(() => {
-            updatePlaylistName("New Playlist");
+            updatePlaylistName("Enter Playlist Name for Spotify");
             setPlaylistTracks([]);
         });
     }
@@ -78,6 +79,7 @@ function App() {
 
   return (
       <div>
+
         <h1>Mu<span className="highlight">Si</span>ca!</h1>
         <div className="App">
           <SearchBar onSearch={search} onAction={getBestSingerTracks}/>

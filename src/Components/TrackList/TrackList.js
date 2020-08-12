@@ -6,11 +6,11 @@ import 'react-perfect-scrollbar/dist/css/styles.css';
 
 function TrackList(props){
     if ((!props.tracks || props.tracks.length < 10) && !props.isRemoval) {
-        return <span>Loading...</span>;
+        return <span className="waiting-prompt">Waiting...</span>;
     }
 
     if ((!props.tracks || props.tracks.length < 1) && props.isRemoval) {
-        return <span>Click + button to add songs to your playlist.</span>;
+        return <span className="user-prompt">Click + button to add songs to your playlist.</span>;
     }
 
     else{

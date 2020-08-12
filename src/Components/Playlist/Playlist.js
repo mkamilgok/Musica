@@ -15,7 +15,11 @@ function Playlist(props) {
 
     return (
         <div className="Playlist">
-            <input autofocus value={props.playlistName} onChange={handleNameChange}/>
+            <input
+                autofocus
+                value={props.playlistName}
+                onChange={handleNameChange}
+            />
             <TrackList tracks={props.playlistTracks} onRemove={props.onRemove} isRemoval={true}/>
             <button className="Playlist-save" onClick={saveList}>SAVE TO SPOTIFY</button>
         </div>
