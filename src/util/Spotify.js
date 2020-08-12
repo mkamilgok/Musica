@@ -184,6 +184,34 @@ let Spotify = {
             .then(jsonResponse => {
                 return jsonResponse;
             });
+    },
+    getRecommendationsByArtists(artistIdList) {
+        const accessToken = Spotify.getAccessToken();
+        let artistIDs = artistIdList[0];
+        for(let i = 1; i < artistIdList.length; i++){
+            artistIDs += "%2C" + artistIdList[i];
+        }
+        return fetch(`https://api.spotify.com/v1/recommendations?limit=40&market=from_token&seed_artists=${artistIDs}&min_popularity=40`, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        })
+            .then(response => response.json())
+            .then(jsonResponse => {
+                let rawSongs = jsonResponse.tracks;
+                const songs = [];
+                for(let song of rawSongs){
+                    songs.push({
+                        id: song.id,
+                        name: song.name,
+                        artist: song.artists[0].name,
+                        album: song.album.name,
+                        uri: song.uri,
+                        url: song.external_urls.spotify
+                    });
+                }
+                return songs;
+            });
     }
 };
 

@@ -61,7 +61,7 @@ function App() {
             songsFromArtists.push(arr);
         }
 
-        const songsToBeAdded = [];
+        let songsToBeAdded = [];
         for(let i = 0; i < songsFromArtists.length; i++){
             //Get ids of top ten songs
             const idList = songsFromArtists[i].map(song => song.id);
@@ -76,6 +76,26 @@ function App() {
             }
             songsToBeAdded.push(randomSong);
         }
+
+
+        let recommendedBySpotify1 = await Spotify.getRecommendationsByArtists(bestArtists.slice(0,5).map(artist => artist.id));
+        let idList = recommendedBySpotify1.map(song => song.id);
+        let isSaved = await Spotify.checkSongsAreSaved(idList);
+        let unsavedSongs = recommendedBySpotify1.filter((song, index) => !isSaved[index]);
+        let shuffled = unsavedSongs.sort(() => 0.5 - Math.random());
+        let selected = shuffled.slice(0, 5);
+        console.log(selected);
+        songsToBeAdded = songsToBeAdded.concat(selected);
+
+        let recommendedBySpotify2 = await Spotify.getRecommendationsByArtists(bestArtists.slice(5,10).map(artist => artist.id));
+        idList = recommendedBySpotify2.map(song => song.id);
+        isSaved = await Spotify.checkSongsAreSaved(idList);
+        unsavedSongs = recommendedBySpotify2.filter((song, index) => !isSaved[index]);
+        shuffled = unsavedSongs.sort(() => 0.5 - Math.random());
+        selected = shuffled.slice(0, 5);
+        console.log(selected);
+        songsToBeAdded = songsToBeAdded.concat(selected);
+
         setSongs(songsToBeAdded);
     }
 
