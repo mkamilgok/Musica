@@ -119,7 +119,7 @@ function App() {
 
   return (
       <div>
-        <h1>Mu<span className="highlight">Si</span>ca!</h1>
+        <h1>Mu<span className="highlight">Si</span>ca!<span className="author" >- by <a target="_blank" href="https://github.com/mkamilgok/Musica"> @mkamilgok</a></span></h1>
         <div className="App">
           <SearchBar onAction={getDiscoveredSongs}/>
           <div className="App-playlist">

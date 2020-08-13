@@ -38,9 +38,9 @@
     font-weight: 300;
     color: rgba(256, 256, 256, 0.8);
 }
-a {
+.link {
     color: #d4ff94;
 }
-a:hover {
+.link:hover {
     color: #b2fc51;
 }

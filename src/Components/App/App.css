@@ -9,7 +9,7 @@ html {
 }
 
 h1 {
-  padding: .77rem 0;
+  padding: .77rem 0 .77rem 9rem;
   background-color: #010c3f;
   text-align: center;
   font-family: 'Poppins', sans-serif;
@@ -49,4 +49,18 @@ h2 {
     align-items: center;
     flex-direction: column;
   }
+}
+
+.author{
+  color: #8fe1ff;
+  display: flex;
+  font-size: 0.85rem;
+  float:right;
+  vertical-align: 50px;
+}
+a {
+  color: #8fe1ff;
+}
+a:hover{
+  color: #418ba6;
 }
