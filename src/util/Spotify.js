@@ -1,5 +1,5 @@
 const clientId = 'a423bae17aa242d3a0bc2d598defd0b6';
-const redirectUri = 'http://localhost:3000/';
+const redirectUri = 'https://musica-discover.herokuapp.com/';
 
 let accessToken = "";
 
